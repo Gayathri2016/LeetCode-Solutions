@@ -363,6 +363,54 @@ var myPow = function(x, n) {
     return res;
     
 };
+function TreeNode(val) {
+   this.val = val;
+   this.left = this.right = null;
+ }
 var trimBST = function(root, L, R) {
-    
+
+	if(root == null)
+		return root;
+   if(root.val > R) return trimBST(root.left, L, R);
+	 if(root.val < L) return trimBST(root.right, L, R);
+
+	 root.left = trimBST(root.left, L, R);
+	 root.right = trimBST(root.right, L, R);
+	 return root;
 };
+
+
+var islandPerimeter = (grid) => {
+  let islands = 0;
+  let neighbors = 0;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length ; j++) {
+      if (grid[i][j]) {
+        islands++;
+				//this will check down cell
+        if (i < grid.length - 1 && grid[i + 1][j]) neighbors++;
+				//next cell
+        if (grid[i][j + 1]) neighbors++;
+      }
+    }
+  }
+  return islands * 4 - neighbors * 2;
+};
+
+var fizzBuzz = function(n) {
+	let result = [];
+    for(let i=1;i<=n;i++)
+		{
+			if(i%3 ==0 && i%5 ==0)
+				result.push("FizzBuzz");
+			else if(i%3 ==0)
+				result.push("Fizz");
+			else if(i%5 ==0)
+				result.push("Buzz");
+			else
+				result.push(i.toString());
+
+		}
+		return result;
+};
+
