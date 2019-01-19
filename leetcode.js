@@ -413,4 +413,22 @@ var fizzBuzz = function(n) {
 		}
 		return result;
 };
+var searchRotatingArray = function (nums, target, start, end) {
+    if (start < end) {
+        let mid = Math.round((start + end) / 2);
+        if (nums[mid] == target)
+            return mid;
+        else {
+            return Math.max(searchRotatingArray(nums, target, mid + 1, end), searchRotatingArray(nums, target, start, mid - 1));
 
+        }
+    } else if (start == end) {
+        if (nums[start] == target)
+            return start;
+    }
+    return -1;
+}
+var search = function (nums, target) {
+    return searchRotatingArray(nums, target, 0, nums.length - 1);
+
+};
