@@ -1,9 +1,9 @@
 
 	var assert = chai.assert;
-describe("longestSubString", function() {
+describe("lengthOfLongestSubstring", function() {
 	function Test(x, e){
 		it(`${x} is ${e}`, function() {
-		 assert.equal(longestSubString(x), e, );
+		 assert.equal(lengthOfLongestSubstring(x), e, );
 	});
 }
 Test("abacabcbbbb", 'abc');
