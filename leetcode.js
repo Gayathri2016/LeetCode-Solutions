@@ -432,22 +432,28 @@ var search = function (nums, target) {
     return searchRotatingArray(nums, target, 0, nums.length - 1);
 
 };
-var longestSubString = function(s)
-{
-	let hashtable = [];
+var lengthOfLongestSubstring = function(s) {
+    let current = '';
 	let temp ='';
-	for(let i =0;i<=s.length;i++)
+	let hashmap = {};
+	if(s.length <2)
+			 return s.length;
+	for(let i =0;i<s.length;i++)
 	{
-		if(temp !== s[i] && !temp.includes(s[i]))
+		if(!temp.includes(s[i]))
+		{
 			temp+=s[i];
-		else {
-			hashtable.push({str: temp, le:temp.length}) ;
-			temp = s[i];
+			hashmap[s[i]] = i;
 		}
-	}
-	// the following arrow function returns max highest element in array
-	// the below reduce method take index 0 a intial value to loop the max value
-	let result = hashtable.reduce((max,b) => b.le > max? b.str: max, hashtable[0].le);
-	return result;//hashtable.reduce((a,b) => a.length);
-};
+		else
+		{
+			temp = '';
+			i = hashmap[s[i]];
 
+		}
+        if(current.length < temp.length)
+			current = temp;
+	}
+	
+	return current.length;
+};
