@@ -1,5 +1,15 @@
 
 	var assert = chai.assert;
+
+
+	describe("findDuplicates", function() {
+		function Test(x,k, e){
+			it(`${x} is ${e}`, function() {
+			 assert.equal(findDuplicates(x, k), e, );
+		});
+	}
+	Test([1,2,3,4], [3,4,5,6], [3,4]);
+});
 	describe("subdomainVisits", function() {
 		function Test(x, e){
 			it(`${x} is ${e}`, function() {

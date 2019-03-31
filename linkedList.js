@@ -149,6 +149,65 @@
   * obj.addAtIndex(index,val)
   * obj.deleteAtIndex(index)
   */
+var doublyNode  = function(val)
+{
+  this.val = val;
+  this.prev = null;
+  this.next = null;
+}
+function mydoublyLinkedList()
+{
+    this._length = 0
+    this.head = null
+    this.tail = null
+
+}
+mydoublyLinkedList.prototype.doublyListAdd = function(val)
+{
+  let n = new doublyNode(val)
+  if(!this.head)
+  {
+    this.head = n;
+    this.tail = n;
+  }
+  else {
+    n.prev = this.tail;
+    this.tail.next = n;
+    this.tail = n;
+
+  }
+
+}
+mydoublyLinkedList.prototype.insertSortDoublyList = function()
+{
+  var before = { val: -1, next: null };
+
+  let curr = this.head
+  while (curr) {
+        var prev = before;
+
+        // find prev
+        while ( prev.next && prev.next.val < curr.val ) {
+            prev = prev.next;
+        }
+
+        var next = curr.next;
+        curr.next = prev.next;
+        prev.next = curr;
+        curr = next;
+    }
+
+    return before.next;
+
+
+}
+var list3 = new mydoublyLinkedList();
+list3.doublyListAdd(5);
+list3.doublyListAdd(2);
+list3.doublyListAdd(4);
+list3.doublyListAdd(3);
+list3.insertSortDoublyList();
+console.log("mydoubly linked list :" + list3);
 
 
  var reverseLinkedList = function(val)
@@ -172,11 +231,14 @@
  }
  var l1 = new MyLinkedList();
  var l2 = new MyLinkedList();
- console.log("Add to head:" + l1.addAtHead(1));
+ l1.addAtHead(1);
+ l1.addAtHead(1);
+ l1.addToTail(2);
+ //console.log("Add to head:" + l1.addAtHead(1));
  //console.log("Add to head:" + l1.addAtHead(2))
 //  console.log("delete to index:" +l1.deleteAtIndex(1));
  //console.log("Add to tail:" +l1.addToTail(3));
- console.log("Add to index:" +l1.addAtIndex(1, 2));  // linked list becomes 1->2->3
+ //console.log("Add to index:" +l1.addAtIndex(1, 2));  // linked list becomes 1->2->3
  //console.log("Add to index:" +l1.addAtIndex(1, 5));
  //console.log("Add to tail:" +l1.addToTail(7));
  /*console.log("Add to head:" + l1.addAtHead(1));
@@ -185,12 +247,12 @@
  console.log("Add to index:" +l1.addAtIndex(3, 0));
  console.log("Add to tail:" +l1.addToTail(1));
  console.log("Add to tail:" +l1.addToTail(0));*/
- console.log("get:" +l1.get(1));
+ //console.log("get:" +l1.get(1));
 // console.log("delete to index:" +l1.deleteAtIndex(6));
  //console.log("get:" + l1.get(1));
 // console.log("Add to index:" +l1.addAtIndex(0, 1));        // returns 2
- console.log("get:" +l1.get(0));
- console.log("get:" + l1.get(2));
+// console.log("get:" +l1.get(0));
+ //console.log("get:" + l1.get(2));
  //console.log("delete to index:" +l1.deleteAtIndex(1));  // now the linked list is 1->3
          // returns 3
 
@@ -230,3 +292,32 @@ console.log(p1);
 return p1;
 
 };
+
+ MyLinkedList.prototype.deleteDuplicates = function() {
+  if(this.head ==null)return null
+    var node = this.head
+    if(head ==null)return null
+
+      while( node.next !==null)
+          {
+              if(node.val === node.next.val)
+                  node.next = node.next.next
+              else
+                  node = node.next
+          }
+      return head
+
+};
+var maxSubArray = function(nums) {
+
+    let prev = 0
+    let max = 0
+    for(let i=0; i<nums.length;i++)
+    {
+      prev = Math.max(prev +nums[i], nums[i])
+      max= Math.max(max, prev)
+    }
+    return max;
+};
+console.log('max Subarray:' + maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
+//console.log("deleteDuplicates:"+l1.deleteDuplicates());

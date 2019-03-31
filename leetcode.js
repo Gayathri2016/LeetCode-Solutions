@@ -358,6 +358,61 @@ var trimBST = function (root, L, R) {
     root.right = trimBST(root.right, L, R);
     return root;
 };
+var isSameTree = function(p, q) {
+  if(p==null || q == null)
+     return false
+ if(p.val != q.val)
+    return false
+
+ return isSameTree(p.left, q.left)&& isSameTree(p.right, q.right)
+};
+var BinaryTree = function(val)
+{
+  this.root = null;
+}
+BinaryTree.prototype.insert = function (value) {
+
+  // accepts a value and places in the tree in the correct position.
+
+  var node = new TreeNode(value);
+
+
+
+  function recurse(bst) {
+
+    if (bst.value > value && bst.left === undefined) {
+
+      bst.left = node;
+
+    } else if (bst.value > value) {
+
+      recurse(bst.left);
+
+    } else if (bst.value < value && bst.right === undefined) {
+
+      bst.right = node;
+
+    } else if (bst.value < value) {
+
+      recurse(bst.right);
+
+    }
+
+  }
+
+
+  recurse(this);
+
+}
+
+let p = new BinaryTree(1)
+let q = new BinaryTree(1)
+p.insert(2)
+p.insert(3)
+q.insert(2)
+q.insert(3)
+
+console.log("issametree of:" + isSameTree(p, q))
 
 
 var islandPerimeter = (grid) => {
@@ -699,3 +754,41 @@ return res;*/
     }
     return arr; */
 };
+var findDuplicates = function(a1, a2)
+{
+  let res = new Set()
+  a1.forEach(x=> {
+    a2.forEach(y => {
+      if(x == y)
+       res.add(x)
+    })
+  })
+  return res;
+};
+var reverseArray = function(arr)
+{
+  let res=[]
+   for(let i=arr.length-1;i>=0;i--)
+   {
+       res.push(arr[i])
+   }
+   return res
+}
+function mWelcome(l,a1, a2)
+{
+    let res =[]
+    let count = 0;
+    while(count <l)
+    {
+
+      res.push(a1[count] + a2[count]);
+      count++
+    }
+    return res;
+}
+console.log("mWelcome:" + mWelcome(5,[1,2,3,4,5],[4,5,3,2,10]));
+
+console.log(reverseArray([1,2,3,4,5]))
+var arr = arr.split('\n');
+arr.splice(0,1);
+process.stdout.write( arr.reverse().toString().split(',').join('\n'));
