@@ -1,42 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="chai.js"></script>
-<script src="mocha.js"></script>
+    <script src="chai.js"></script>
+    <script src="mocha.js"></script>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3.32.0/dist/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@3.0.0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="moca.css">
+    <link rel="stylesheet" href="moca.css">
 </head>
 <body>
 
-<h2>My First JavaScript</h2>
+    <div><h2>Searching for '<%=query%>'</h2></div>
+    <input id="SearchInput" class="form-control" placeholder="Search for..." type="text">
+    <div class="proThumbImg col-md-5 col-xs-10">
+        <a href="#<%=hit.category%>/<%=hit.guid%>.json">
 
-<button type="button"
-onclick="document.getElementById('demo').innerHTML = isNumber('.44.8') ">
-display.</button>
+        </a>
+    </div>
 
-<!--MajorityEle([668474] powerSet([1,2,3]   mergeIntervals([[10, 20], [19, 40], [40, 60], [70, 80]]))  maxChar('bdd')
- SumFibEvenNumRec(9) findMidLinkedList(list) addTwolists(list1, list2) rotateArray([12,11,8,2,3,4,5])
-  ThreeSum([10, 2, 3, 1, 5, 3, 1, 4, -4, -3, -2])
--->
-<p id="demo" ></p>
-<div id="mocha" ></div>
-<script>mocha.setup('bdd')
+    <button type="button" id="btnsearch" onclick="document.getElementById('demo').innerHTML = mParanthesis()"> search</button>
 
-</script>
-<script src="leetcode.js"></script>
-<script src="test.js"></script>
+    <!--onclick="document.getElementById('demo').innerHTML = isNumber('.44.8') ">-->
+    display.</button>
 
-<script>
-mocha.run();
-</script>
+    <!--MajorityEle([668474] powerSet([1,2,3]   mergeIntervals([[10, 20], [19, 40], [40, 60], [70, 80]]))  maxChar('bdd')
+     SumFibEvenNumRec(9) findMidLinkedList(list) addTwolists(list1, list2) rotateArray([12,11,8,2,3,4,5])
+      ThreeSum([10, 2, 3, 1, 5, 3, 1, 4, -4, -3, -2])
+    -->
+    <p id="demo"></p>
+    <div id="mocha"></div>
+    <script>
+mocha.setup('bdd')
+
+    </script>
+    <!--<script src="leetcode.js"></script>
+    <script src="test.js"></script>
+    <script src="linkedList.js"></script>-->
+    <script src='matchingBrackets.js'></script>
+
+    <script>
+
+
+
+        let client = algoliasearch('2QY5TEXHBK', '5da27bcc87d9863a919c095c6e8f2183');
+        let index = client.initIndex('prod_PRODUCTS_neolife_us_en');
+        $('#SearchInput').on('selectionchange keyup keydown', function (e) {
+            var q = $.trim($(this).val());
+            if (q.length > 0) {
+                index.search(q, function searchDone(err, content) {
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        content.query = q;
+                        $('#proThumb').html(content);
+                    }
+                });
+                if (e.which == 13) {
+                    window.location = $('.proThumbImg:first>a').prop('href');
+                }
+            }
+        });
+
+        mocha.run();
+    </script>
 </body>
 
-</html> 
+</html>
 <!--
 }else if( i >0 && s[i-1] !== 'e' && s[i] == '+' || i >0 && s[i-1] !== 'e' && s[i] == '-' || i >0 && s[i-1] !== 'e' && s[i] == "*")
-		{
-			str+=s[i];
-		}
-		-->
+        {
+            str+=s[i];
+        }
+        -->

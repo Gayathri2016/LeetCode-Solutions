@@ -466,9 +466,7 @@ var search = function (nums, target) {
     return searchRotatingArray(nums, target, 0, nums.length - 1);
 
 };
-var lengthOfLongestSubstring = function(s) {
 
-};
 
 var lengthOfLongestSubstring = function(s) {
     let current = '';
@@ -786,9 +784,34 @@ function mWelcome(l,a1, a2)
     }
     return res;
 }
+
+var arr =[];
+//https://algorithms.tutorialhorizon.com/generate-all-valid-parenthesis-strings-of-length-2n-of-given-n/
+function printParanthesis(open, close, str)
+{
+  if(open ===0 && close===0)
+    arr.push(str);
+  if(open > close)
+    return;
+  if(open >0)
+    return printParanthesis(open-1, close, str+'(' );
+  if(close > 0)
+    return printParanthesis(open, close-1, str+')');
+}
+
+
+let n=2;
+for(let k=1;k<=n;k++)
+{
+  printParanthesis(k,k,'');
+}
+
+//printParanthesis(n,n,'');
+console.log('printParanthesis:' + arr.toString());
+
 console.log("mWelcome:" + mWelcome(5,[1,2,3,4,5],[4,5,3,2,10]));
 
 console.log(reverseArray([1,2,3,4,5]))
 var arr = arr.split('\n');
 arr.splice(0,1);
-process.stdout.write( arr.reverse().toString().split(',').join('\n'));
+//process.stdout.write( arr.reverse().toString().split(',').join('\n'));
